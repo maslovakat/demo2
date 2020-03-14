@@ -1,6 +1,6 @@
 
 export class ProductListModel {
-    link = "../../../app/data/data.json";
+    link = "../../app/data/data.json";
     constructor(cback) {
         this.handleLoad = cback;
     }
