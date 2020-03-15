@@ -9,12 +9,12 @@ export class ProductListModel {
     getProductList() {
         const ajax = new XMLHttpRequest();
         ajax.addEventListener("load", () => {
-            console.log(JSON.parse(ajax.responseText))
             this.handleLoad(JSON.parse(ajax.responseText));
         });
         ajax.open('GET', this.link);
         ajax.send();
     }
+    
     // getProductList() {
     //     let data;
     //     const ajax = new XMLHttpRequest();
