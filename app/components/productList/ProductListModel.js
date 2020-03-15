@@ -3,7 +3,7 @@ export class ProductListModel {
     
     constructor(cback) {
         this.handleLoad = cback;
-        this.link = "../../app/data/data.json";
+        this.link = "app/data/data.json";
     }
     
     getProductList() {
