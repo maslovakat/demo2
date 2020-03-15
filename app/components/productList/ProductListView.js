@@ -3,7 +3,7 @@ export class ProductListView {
         this.container = document.querySelector('.goods-wrapper');
     }
 
-    renderMessage(arr) {
+    renderList(arr) {
         this.container.innerHTML="";
         arr.forEach((el, ind, arr) => {
             let productCard = this.createProductCard(el);

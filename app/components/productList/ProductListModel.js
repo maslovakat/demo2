@@ -1,3 +1,4 @@
+
 export class ProductListModel {
     
     constructor(cback) {
@@ -13,7 +14,6 @@ export class ProductListModel {
         ajax.open('GET', this.link);
         ajax.send();
     }
-    
     // getProductList() {
     //     let data;
     //     const ajax = new XMLHttpRequest();
