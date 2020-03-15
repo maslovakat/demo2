@@ -1,4 +1,3 @@
-
 export class ProductListModel {
     
     constructor(cback) {
