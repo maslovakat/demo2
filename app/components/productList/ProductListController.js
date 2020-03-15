@@ -2,8 +2,6 @@ import { ProductListView } from './ProductListView.js';
 import { ProductListModel } from './ProductListModel.js';
 
 
-
-
 export class ProductListController {
     constructor() {
         this.view = new ProductListView();

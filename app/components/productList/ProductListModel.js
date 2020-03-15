@@ -1,4 +1,3 @@
-
 export class ProductListModel {
     link = "../../app/data/data.json";
     constructor(cback) {
