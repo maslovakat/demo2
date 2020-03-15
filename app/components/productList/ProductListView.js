@@ -3,7 +3,7 @@ export class ProductListView {
 
     }
 
-    renderMessage(arr) {
+    renderList(arr) {
         console.log(arr);
     }
 }
