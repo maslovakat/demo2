@@ -24,7 +24,7 @@ export class ProductListView {
                                 <li class="list-group-item">
                                     <p class="card-title">${prod.breed}</p>
                                     <p class="card-text">${prod.species}  ${prod.gender}</p>
-                                    <p class="card-age"> Age: ${prod.birth_date}</p>
+                                    <p class="card-age"> Age: ${prod.age}</p>
                                 </li>
                                 <li class="list-group-item card-price">Price: $ ${prod.price}</li>
                             </ul>
