@@ -3,10 +3,8 @@ import { ProductListModel } from './ProductListModel.js';
 
 export class ProductListController {
 
-//    productList;
-
     constructor() {
-        this.view = new ProductListView(this.handleFilter.bind(this));
+        this.view = new ProductListView();
         this.model = new ProductListModel(this.handleLoadList.bind(this));
         this.model.getProductList();
     }
