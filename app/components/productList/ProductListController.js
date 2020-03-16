@@ -6,7 +6,7 @@ export class ProductListController {
    //productList;
 
     constructor() {
-        this.view = new ProductListView();
+        this.view = new ProductListView(this.handleFilter.bind(this));
         this.model = new ProductListModel(this.handleLoadList.bind(this));
         this.model.getProductList();
     }
@@ -18,10 +18,8 @@ export class ProductListController {
         this.view.renderList(arr);
     }
 
-    sort(species){
-        let filteredList = this.productList.filter((el) => {
-            return el.species === species;
-        })
+    handleFilter(e){
+        const filteredList = this.model.filterBySpecies(e);
         this.view.renderList(filteredList);
     }
 }
