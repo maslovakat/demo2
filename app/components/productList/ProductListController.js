@@ -16,7 +16,7 @@ export class ProductListController {
         this.view.renderList(this.productList);
     }
 
-    sort(species){
+    filterProducts(species){
         let filteredList = this.productList.filter((el) => {
             return el.species === species;
         })
