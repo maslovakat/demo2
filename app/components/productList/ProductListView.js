@@ -1,6 +1,8 @@
 export class ProductListView {
-    constructor() {
+    constructor(handleFilter) {
         this.container = document.querySelector('.goods-wrapper');
+        this.navbarNav = document.querySelector('.navbar-nav');
+        this.navbarNav.addEventListener('click', handleFilter);
     }
 
     renderList(arr) {

@@ -1,5 +1,6 @@
 
 export class ProductListModel {
+   productList;
     
     constructor(cback) {
         this.handleLoad = cback;
@@ -9,20 +10,16 @@ export class ProductListModel {
     getProductList() {
         const ajax = new XMLHttpRequest();
         ajax.addEventListener("load", () => {
-            this.handleLoad(JSON.parse(ajax.responseText));
+            this.productList = JSON.parse(ajax.responseText)
+            this.handleLoad(this.productList);
         });
         ajax.open('GET', this.link);
         ajax.send();
     }
-    
-    // getProductList() {
-    //     let data;
-    //     const ajax = new XMLHttpRequest();
-    //     ajax.addEventListener("load", function (event) {
-    //         data =  JSON.parse(ajax.responseText);
-    //     });
-    //     ajax.open('GET', this.link, false);
-    //     ajax.send();
-    //     return data;
-    // }
+
+    filterBySpecies(e) {
+        const selectedSpecies = e.toElement.id;
+        let filteredList = this.productList.filter((el) => el.species === selectedSpecies)
+        return filteredList;
+    }
 }
