@@ -23,6 +23,11 @@ export class ProductListModel {
         return filteredList;
     }
 
+    searchByBreed(str) {
+        const regSearch = new RegExp(str, 'i');
+        return this.productList.filter(({breed})=>regSearch.test(breed));
+    }
+
     getDateOfBirth(prod) {
         let diff = Date.now() - prod.birth_date;
         let days = Math.floor(diff / (1000 * 60 * 60 * 24));

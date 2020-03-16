@@ -14,7 +14,7 @@ export class ProductListView {
     createProductCard (prod) { // будет создавать карточки
         const card = document.createElement('div');
         
-        card.className = 'card-wrapper col-12 col-md-6 col-lg-4 col-xl-3 pb-3';
+        card.className = 'card-wrapper col-12 col-md-6 col-lg-4 col-xl-4 pb-3';
         
         card.innerHTML = `<div class="card border-secondary h-100">  
                             <div class = "card-img-wrapper">    

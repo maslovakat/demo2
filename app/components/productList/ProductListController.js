@@ -20,4 +20,9 @@ export class ProductListController {
         const filteredList = this.model.filterBySpecies(e);
         this.view.renderList(filteredList);
     }
+
+    handleSearch(str) {
+        const searchList = this.model.searchByBreed(str);
+        this.view.renderList(searchList);
+    }
 }
