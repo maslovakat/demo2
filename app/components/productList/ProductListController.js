@@ -27,13 +27,11 @@ export class ProductListController {
         this.view.renderList(wholeList);
     }
 
-
     handleSearch(str) {
         const searchList = this.model.filterAndSearch(null, str);
         this.view.renderList(searchList);
     }
 
-    
     handleSort(e) {
         const sortedList = this.model.sortedBy(e);
         this.view.renderList(sortedList);

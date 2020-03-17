@@ -30,7 +30,7 @@ export class ProductListModel {
 
         if(str) {
             const regSearch = new RegExp(str, 'i');
-            return this.filteredList.filter(({breed})=>regSearch.test(breed));
+            this.filteredList = this.filteredList.filter(({breed})=>regSearch.test(breed));
         }
 
         return this.filteredList;
@@ -38,13 +38,13 @@ export class ProductListModel {
 
     sortedBy(e) {
         const sortedBy = e.target.text;
-        let sortedList;
-        if(sortedBy === 'price low') {
-            sortedList = this.productList.sort((a,b) => a.price - b.price);
-        }else if((sortedBy === 'price high')){
-            sortedList = this.productList.sort((a,b) => b.price - a.price);
+        switch (sortedBy) {
+            case 'price low': this.filteredList.sort((a,b) => a.price - b.price); break;
+            case 'price high': this.filteredList.sort((a,b) => b.price - a.price); break;
+            case 'age low': this.filteredList.sort((a,b) => b.birth_date - a.birth_date); break;
+            case 'age high': this.filteredList.sort((a,b) => a.birth_date - b.birth_date); break;
         }
-        return sortedList;
+        return this.filteredList;
     }
 
     getDateOfBirth(prod) {
