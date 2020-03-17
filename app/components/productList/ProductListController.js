@@ -16,9 +16,14 @@ export class ProductListController {
         this.view.renderList(arr);
     }
 
-    handleFilter(e){
+    handleFilter(e) {
         const filteredList = this.model.filterBySpecies(e);
         this.view.renderList(filteredList);
+    }
+
+    // get whole list after clicking on brand "petShop"
+    handleGetList() {
+        this.view.renderList(this.model.productList);
     }
 
     handleSearch(str) {
