@@ -26,6 +26,11 @@ export class ProductListController {
         this.view.renderList(this.model.productList);
     }
 
+    handleSort(e) {
+        const sortedList = this.model.sortedBy(e);
+        this.view.renderList(sortedList);
+    }
+
     handleSearch(str) {
         const searchList = this.model.searchByBreed(str);
         this.view.renderList(searchList);

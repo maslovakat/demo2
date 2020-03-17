@@ -28,6 +28,17 @@ export class ProductListModel {
         return this.productList.filter(({breed})=>regSearch.test(breed));
     }
 
+    sortedBy(e) {
+        const sortedBy = e.target.text;
+        let sortedList;
+        if(sortedBy === 'price low') {
+            sortedList = this.productList.sort((a,b) => a.price - b.price);
+        }else if((sortedBy === 'price high')){
+            sortedList = this.productList.sort((a,b) => b.price - a.price);
+        }
+        return sortedList;
+    }
+
     getDateOfBirth(prod) {
         let diff = Date.now() - prod.birth_date;
         let days = Math.floor(diff / (1000 * 60 * 60 * 24));

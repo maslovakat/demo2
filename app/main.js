@@ -5,4 +5,5 @@ const productList = new ProductListController();
 const filterAndSearch = new FilterSearchController(
     productList.handleFilter.bind(productList), 
     productList.handleSearch.bind(productList), 
-    productList.handleGetList.bind(productList));
+    productList.handleGetList.bind(productList), 
+    productList.handleSort.bind(productList));

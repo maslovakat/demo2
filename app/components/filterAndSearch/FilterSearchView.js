@@ -1,5 +1,5 @@
 export class FilterSearchView {
-    constructor(handleFilter, handleSearch, handleGetList) {
+    constructor(handleFilter, handleSearch, handleGetList, handleSort) {
         // filter by category
         this.navbarNav = document.querySelector('.navbar-nav');
         this.navbarNav.addEventListener('click', handleFilter);
@@ -9,6 +9,10 @@ export class FilterSearchView {
         // search by breed
         this.input = document.querySelector('.search');
         this.input.addEventListener('input', handleSearch);
+        // sortedBy
+        this.sortedBy = document.querySelector('#sortedBy');
+        this.sortedBy.addEventListener('click', handleSort);
+
     }
 
     getSearchValue() {
