@@ -17,22 +17,25 @@ export class ProductListController {
     }
 
     handleFilter(e) {
-        const filteredList = this.model.filterBySpecies(e);
+        const filteredList = this.model.filterAndSearch(e, null);
         this.view.renderList(filteredList);
     }
 
     // get whole list after clicking on brand "petShop"
     handleGetList() {
-        this.view.renderList(this.model.productList);
+        const wholeList = this.model.filterAndSearch('all', null);
+        this.view.renderList(wholeList);
     }
 
+
+    handleSearch(str) {
+        const searchList = this.model.filterAndSearch(null, str);
+        this.view.renderList(searchList);
+    }
+
+    
     handleSort(e) {
         const sortedList = this.model.sortedBy(e);
         this.view.renderList(sortedList);
-    }
-
-    handleSearch(str) {
-        const searchList = this.model.searchByBreed(str);
-        this.view.renderList(searchList);
     }
 }

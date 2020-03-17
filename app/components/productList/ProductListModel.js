@@ -1,7 +1,8 @@
 
 export class ProductListModel {
    productList;
-    
+   filteredList = this.productList;
+
     constructor(cback) {
         this.handleLoad = cback;
         this.link = "app/data/data.json";
@@ -17,15 +18,21 @@ export class ProductListModel {
         ajax.send();
     }
 
-    filterBySpecies(e) {
-        const selectedSpecies = e.toElement.id;
-        let filteredList = this.productList.filter((el) => el.species === selectedSpecies);
-        return filteredList;
-    }
+    filterAndSearch(e, str) {
 
-    searchByBreed(str) {
-        const regSearch = new RegExp(str, 'i');
-        return this.productList.filter(({breed})=>regSearch.test(breed));
+        if(e === 'all') {
+            this.filteredList = this.productList;
+        }else if(e) {
+            const selectedSpecies = e.toElement.id;
+            this.filteredList = this.productList.filter((el) => el.species === selectedSpecies);
+        }
+
+        if(str) {
+            const regSearch = new RegExp(str, 'i');
+            return this.filteredList.filter(({breed})=>regSearch.test(breed));
+        }
+
+        return this.filteredList;
     }
 
     sortedBy(e) {
@@ -47,5 +54,5 @@ export class ProductListModel {
         let daysAge = Math.floor((days % 365) - monthsAge * 30);
 
         return `${yearsAge < 1? '': yearsAge + "years "}${monthsAge < 1? '': monthsAge + "months "}${daysAge < 1 ? '': daysAge + "days "} `;
-    } 
+    }
 }
