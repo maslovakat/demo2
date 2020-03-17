@@ -1,7 +1,7 @@
 
 export class ProductListModel {
    productList;
-   filteredList = this.productList;
+   filteredList;
 
     constructor(cback) {
         this.handleLoad = cback;
@@ -12,6 +12,7 @@ export class ProductListModel {
         const ajax = new XMLHttpRequest();
         ajax.addEventListener("load", () => {
             this.productList = JSON.parse(ajax.responseText);
+            this.filteredList = this.productList;
             this.handleLoad(this.productList);
         });
         ajax.open('GET', this.link);

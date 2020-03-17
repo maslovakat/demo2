@@ -9,6 +9,7 @@ export class FilterSearchView {
         // search by breed
         this.input = document.querySelector('.search');
         this.input.addEventListener('input', handleSearch);
+        this.input.addEventListener('change', (e) => e.target.value = '');
         // sortedBy
         this.sortedBy = document.querySelector('#sortedBy');
         this.sortedBy.addEventListener('click', handleSort);
