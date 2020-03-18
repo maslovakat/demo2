@@ -28,6 +28,13 @@ input {
 .menu{
     padding: 0 1rem;
 }
+.nav .nav-link:hover,
+.nav .nav-link:active,
+.nav .nav-link:focus-within {
+    color: #343a40;
+    background: rgba(255,255,255,.75);;
+    text-transform: uppercase;
+}
 .search {
     background: #343a40;
     border: 1px solid #686c71;

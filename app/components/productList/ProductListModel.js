@@ -13,6 +13,9 @@ export class ProductListModel {
         ajax.addEventListener("load", () => {
             this.productList = JSON.parse(ajax.responseText);
             this.filteredList = this.productList;
+            this.productList.forEach(el => {
+                el.age = this.getAge(el)
+            });
             this.handleLoad(this.productList);
         });
         ajax.open('GET', this.link);
@@ -47,7 +50,7 @@ export class ProductListModel {
         return this.filteredList;
     }
 
-    getDateOfBirth(prod) {
+    getAge(prod) {
         let diff = Date.now() - prod.birth_date;
         let days = Math.floor(diff / (1000 * 60 * 60 * 24));
         let yearsAge = Math.floor(days / 365);
