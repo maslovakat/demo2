@@ -1,13 +1,18 @@
 import { FilterSearchView } from './FilterSearchView.js';
 
 export class FilterSearchController {
-    constructor(handleF, handleS, handleGetList) {
-        this.view = new FilterSearchView(handleF, this.handleSearch, handleGetList);
-        this.handleSearchBreed = handleS;
+    constructor({notify}) {
+        this.view = new FilterSearchView(this.handleSearch, this.handleFilter);
+        this.notify = notify;
     }
 
     handleSearch = () => {
-        this.handleSearchBreed(this.view.getSearchValue())
+        this.notify('search', this.view.searchValue)
     }
+
+    handleFilter = (e) => {
+        this.notify('filter', e)
+    }
+
 }
 

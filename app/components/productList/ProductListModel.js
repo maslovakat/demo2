@@ -1,13 +1,12 @@
-
 export class ProductListModel {
-   productList;
-   filteredList;
+    productList;
+    filteredList;
 
     constructor(cback) {
         this.handleLoad = cback;
         this.link = "app/data/data.json";
     }
-    
+
     getProductList() {
         const ajax = new XMLHttpRequest();
         ajax.addEventListener("load", () => {
@@ -23,17 +22,20 @@ export class ProductListModel {
     }
 
     filterAndSearch(e, str) {
-
-        if(e === 'all') {
-            this.filteredList = this.productList;
-        }else if(e) {
-            const selectedSpecies = e.toElement.id;
-            this.filteredList = this.productList.filter((el) => el.species === selectedSpecies);
+        if (e) {
+            if (e.target.id === 'petShop') {
+                this.filteredList = this.productList;
+            }else{
+                const selectedSpecies = e.target.id;
+                this.filteredList = this.productList.filter((el) => el.species === selectedSpecies);
+            }
         }
 
-        if(str) {
+        if (str) {
             const regSearch = new RegExp(str, 'i');
-            this.filteredList = this.filteredList.filter(({breed})=>regSearch.test(breed));
+            this.filteredList = this.filteredList.filter(({
+                breed
+            }) => regSearch.test(breed));
         }
 
         return this.filteredList;
@@ -42,10 +44,18 @@ export class ProductListModel {
     sortedBy(e) {
         const sortedBy = e.target.text;
         switch (sortedBy) {
-            case 'price low': this.filteredList.sort((a,b) => a.price - b.price); break;
-            case 'price high': this.filteredList.sort((a,b) => b.price - a.price); break;
-            case 'age low': this.filteredList.sort((a,b) => b.birth_date - a.birth_date); break;
-            case 'age high': this.filteredList.sort((a,b) => a.birth_date - b.birth_date); break;
+            case 'price low':
+                this.filteredList.sort((a, b) => a.price - b.price);
+                break;
+            case 'price high':
+                this.filteredList.sort((a, b) => b.price - a.price);
+                break;
+            case 'age low':
+                this.filteredList.sort((a, b) => b.birth_date - a.birth_date);
+                break;
+            case 'age high':
+                this.filteredList.sort((a, b) => a.birth_date - b.birth_date);
+                break;
         }
         return this.filteredList;
     }
