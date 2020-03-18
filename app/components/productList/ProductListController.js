@@ -15,9 +15,6 @@ export class ProductListController {
     }
    
     handleLoadList(arr) {
-        arr.forEach(el => {
-            el.age = this.model.getAge(el)
-        });
         this.view.renderList(arr);
     }
 
