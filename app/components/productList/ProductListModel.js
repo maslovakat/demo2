@@ -56,6 +56,7 @@ export class ProductListModel {
             case 'age high':
                 this.filteredList.sort((a, b) => a.birth_date - b.birth_date);
                 break;
+            default: this.filteredList.sort((a, b) => a.price - b.price);
         }
         return this.filteredList;
     }
