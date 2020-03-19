@@ -6,7 +6,8 @@ export class Publisher {
     get methods() {
         return {
             subscribe: this.subscribe,
-            notify: this.notify
+            notify: this.notify,
+            unsubscribe: this.unsubscribe
         }
     }
 
@@ -22,5 +23,12 @@ export class Publisher {
             this.subscribes[event] = [];
         }
         this.subscribes[event].forEach(func => func(data));
+    }
+
+    unsubscribe = (event, callbackFunc) => {
+        if(!this.subscribes[event]) {
+            this.subscribes[event] = [];
+        }
+        this.subscribes[event] = this.subscribes[event].filter(func => func != callbackFunc);
     }
 }
