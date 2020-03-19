@@ -18,8 +18,8 @@ export class ProductListController {
         this.view.renderList(arr);
     }
 
-    handleFilter = (e) => {
-        const filteredList = this.model.filterAndSearch(e, null, true);
+    handleFilter = (id) => {
+        const filteredList = this.model.filterAndSearch(id, null, true);
         this.view.renderList(filteredList);
     }
 
