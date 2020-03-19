@@ -21,6 +21,7 @@ export class ProductListView {
 
     renderList(arr) {
         this.container.innerHTML="";
+        arr.length === 0 ? this.container.innerHTML = 'Nothing was found' : null;
         arr.forEach(el => {
             let productCard = this.createProductCard(el);
             this.container.appendChild(productCard);
