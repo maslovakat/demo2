@@ -1,12 +1,14 @@
 export class ProductListModel {
     productList;
     filteredList;
-
-    constructor(cback) {
+    otherAnimals;
+    
+    constructor(cback, handleLoadNavList) {
         this.handleLoad = cback;
+        this.handleLoadNavList = handleLoadNavList;
         this.link = "app/data/data.json";
     }
-
+    
     getProductList() {
         const ajax = new XMLHttpRequest();
         ajax.addEventListener("load", () => {
@@ -16,18 +18,36 @@ export class ProductListModel {
                 el.age = this.getAge(el)
             });
             this.handleLoad(this.productList);
+            this.getSpeciesForNavigation();
         });
         ajax.open('GET', this.link);
         ajax.send();
     }
+    
+    getSpeciesForNavigation() {
+        let allSpecies = {};
+        this.productList.forEach(e => {
+            if(allSpecies[e.species]) {
+                allSpecies[e.species] += 1;
+            }else{
+                allSpecies[e.species] = 1;
+            }
+        })
+        this.handleLoadNavList(allSpecies);
+    }
 
     filterAndSearch(id, str, isFilter) {
         if (isFilter) {
-            if (id === 'petShop') {
+            if(id === 'other') {
+                this.filteredList = this.productList.filter((el) => {
+                    let filteredItem;
+                    this.otherAnimals.forEach((e) => e === el.species ? filteredItem = el.species : null);
+                    return filteredItem;
+                });
+            }else if (id === 'petShop') {
                 this.filteredList = this.productList;
             }else{
-                const selectedSpecies = id;
-                this.filteredList = this.productList.filter((el) => el.species === selectedSpecies);
+                this.filteredList = this.productList.filter((el) => el.species === id);
             }
         }else{
             let searchedList = this.filteredList;
@@ -35,7 +55,6 @@ export class ProductListModel {
             searchedList = searchedList.filter(({breed}) => regSearch.test(breed));
             return searchedList;
         }
-
         return this.filteredList;
     }
 

@@ -5,17 +5,21 @@ export class ProductListController {
     
     constructor({subscribe}) {
         this.view = new ProductListView();
-        this.model = new ProductListModel(this.handleLoadList.bind(this));
+        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this));
         this.model.getProductList();
-
+        
         this.subscribe = subscribe;
         this.subscribe('search', this.handleSearch);
         this.subscribe('filter', this.handleFilter);
         this.subscribe('sort', this.handleSort);
     }
-   
+    
     handleLoadList(arr) {
         this.view.renderList(arr);
+    }
+
+    handleLoadNavList(obj) {
+        this.model.otherAnimals = this.view.renderNavigationList(obj);
     }
 
     handleFilter = (id) => {

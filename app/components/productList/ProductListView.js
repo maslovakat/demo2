@@ -1,6 +1,22 @@
 export class ProductListView {
     constructor() {
         this.container = document.querySelector('.goods-wrapper');
+        this.navbarNav = document.querySelector('.navbar-nav');
+    }
+
+    renderNavigationList(obj){
+        let otherList = [];
+        for(let i in obj){
+            obj[i] > 3 ? this.navbarNav.insertAdjacentHTML('beforeend', 
+            `<li class="nav-item menu-item menu-item-cats">
+                <a class="nav-link" id="${i}" href="#">${i}</a>
+            </li>`) : otherList.push(i);
+        }
+        this.navbarNav.insertAdjacentHTML('beforeend', 
+            `<li class="nav-item menu-item menu-item-cats">
+                <a class="nav-link" id="other" href="#">other</a>
+            </li>`)
+            return otherList
     }
 
     renderList(arr) {
