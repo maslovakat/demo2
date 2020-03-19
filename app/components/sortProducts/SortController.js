@@ -7,6 +7,6 @@ export class SortController {
     }
 
     handleSort = (e) => {
-        this.notify('sort', e)
+        this.notify('sort', e.target.text)
     }
 }

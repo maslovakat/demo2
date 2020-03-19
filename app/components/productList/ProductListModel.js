@@ -21,28 +21,26 @@ export class ProductListModel {
         ajax.send();
     }
 
-    filterAndSearch(e, str) {
-        if (e) {
-            if (e.target.id === 'petShop') {
+    filterAndSearch(id, str, isFilter) {
+        if (isFilter) {
+            if (id === 'petShop') {
                 this.filteredList = this.productList;
             }else{
-                const selectedSpecies = e.target.id;
+                const selectedSpecies = id;
                 this.filteredList = this.productList.filter((el) => el.species === selectedSpecies);
             }
-        }
-
-        if (str) {
+        }else{
+            let searchedList = this.filteredList;
             const regSearch = new RegExp(str, 'i');
-            this.filteredList = this.filteredList.filter(({
-                breed
-            }) => regSearch.test(breed));
+            searchedList = searchedList.filter(({breed}) => regSearch.test(breed));
+            return searchedList;
         }
 
         return this.filteredList;
     }
 
-    sortedBy(e) {
-        const sortedBy = e.target.text;
+    sortedBy(str) {
+        const sortedBy = str;
         switch (sortedBy) {
             case 'price low':
                 this.filteredList.sort((a, b) => a.price - b.price);

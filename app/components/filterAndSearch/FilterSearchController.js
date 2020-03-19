@@ -11,7 +11,7 @@ export class FilterSearchController {
     }
 
     handleFilter = (e) => {
-        this.notify('filter', e)
+        this.notify('filter', e.target.id)
     }
 
 }
