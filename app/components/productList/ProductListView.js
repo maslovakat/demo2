@@ -2,7 +2,12 @@ export class ProductListView {
     constructor() {
         this.container = document.querySelector('.goods-wrapper');
         this.navbarNav = document.querySelector('.navbar-nav');
-        this.loader = document.querySelector('#loader');
+        this.pageCurrent = document.querySelector('.page_current');
+    }
+
+    renderPageNum(num) {
+        console.log('this.pageCurrent.innerText = ', this.pageCurrent.innerText);
+        return this.pageCurrent.innerText = `${num}`;
     }
 
     renderNavigationList(obj){
@@ -21,9 +26,8 @@ export class ProductListView {
     }
 
     renderList(arr) {
-        document.getElementById("loader").style.display = "none";
         this.container.innerHTML="";
-        arr.length === 0 ? this.container.innerHTML = 'Nothing was found' : null;
+
         arr.forEach(el => {
             let productCard = this.createProductCard(el);
             this.container.appendChild(productCard);

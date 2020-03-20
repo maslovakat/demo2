@@ -5,13 +5,14 @@ export class ProductListController {
     
     constructor({subscribe}) {
         this.view = new ProductListView();
-        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this));
+        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this), this.handleLoadPages.bind(this));
         this.model.getProductList();
         
         this.subscribe = subscribe;
         this.subscribe('search', this.handleSearch);
         this.subscribe('filter', this.handleFilter);
         this.subscribe('sort', this.handleSort);
+        this.subscribe('pagination', this.handlePagination);
     }
     
     handleLoadList(arr) {
@@ -35,5 +36,15 @@ export class ProductListController {
     handleSort = (e) => {
         const sortedList = this.model.sortedBy(e);
         this.view.renderList(sortedList);
+    }
+
+    handlePagination = (where = 'next') => {
+        const data = this.model.getPaginationData(where);
+        this.view.renderList(data);
+    }
+
+    handleLoadPages () {
+        console.log('num = ', this.model.getPageNumber());
+        this.view.renderPageNum(this.model.getPageNumber());
     }
 }

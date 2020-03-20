@@ -2,6 +2,8 @@ export class ProductListModel {
     productList;
     filteredList;
     otherAnimals;
+    paginationCount = 6;
+    paginationPage = 1;
     
     constructor(cback, handleLoadNavList) {
         this.handleLoad = cback;
@@ -11,19 +13,45 @@ export class ProductListModel {
     
     getProductList() {
         const ajax = new XMLHttpRequest();
+
         ajax.addEventListener("load", () => {
             this.productList = JSON.parse(ajax.responseText);
             this.filteredList = this.productList;
             this.productList.forEach(el => {
                 el.age = this.getAge(el)
             });
-            this.handleLoad(this.productList);
+            this.handleLoad(this.getPaginationData());
             this.getSpeciesForNavigation();
         });
         ajax.open('GET', this.link);
         ajax.send();
     }
     
+    getPaginationData(where = 'nowhere') {
+        switch(where) {
+            case 'next': {
+                this.paginationPage = this.filteredList.length / this.paginationCount > this.paginationPage? this.paginationPage + 1: 1;
+                break;
+            }
+            case 'prev': {
+                this.paginationPage = this.paginationPage == 1? Math.ceil(this.filteredList.length / this.paginationCount): this.paginationPage - 1;
+                break;
+            }
+            default: {
+                this.paginationPage = 1;
+            }
+        }
+
+        const from = (this.paginationPage - 1) * this.paginationCount;
+        const to = this.paginationPage * this.paginationCount;
+
+        return this.filteredList.slice(from, to);
+    }
+
+    // getPageNumber() {
+    //     return this.paginationPage;
+    // }
+
     getSpeciesForNavigation() {
         let allSpecies = {};
         this.productList.forEach(e => {
@@ -37,6 +65,8 @@ export class ProductListModel {
     }
 
     filterAndSearch(id, str, isFilter) {
+        this.paginationPage = 1;
+
         if (isFilter) {
             if(id === 'other') {
                 this.filteredList = this.productList.filter((el) => {
@@ -53,13 +83,19 @@ export class ProductListModel {
             let searchedList = this.filteredList;
             const regSearch = new RegExp(str, 'i');
             searchedList = searchedList.filter(({breed}) => regSearch.test(breed));
+            //this.filteredList = searchedList;
+            
+            //return this.getPaginationData();
             return searchedList;
         }
-        return this.filteredList;
+
+        return this.getPaginationData();
     }
 
     sortedBy(str) {
+        this.paginationPage = 1;
         const sortedBy = str;
+
         switch (sortedBy) {
             case 'price low':
                 this.filteredList.sort((a, b) => a.price - b.price);
@@ -75,7 +111,8 @@ export class ProductListModel {
                 break;
             default: this.filteredList.sort((a, b) => a.price - b.price);
         }
-        return this.filteredList;
+
+        return this.getPaginationData();
     }
 
     getAge(prod) {
