@@ -2,7 +2,7 @@ import { FilterSearchView } from './FilterSearchView.js';
 
 export class FilterSearchController {
     constructor({notify, unsubscribe}) {
-        this.view = new FilterSearchView(this.handleSearch, this.handleFilter);
+        this.view = new FilterSearchView(this.handleSearch, this.handleFilter, this.handleAll);
         this.notify = notify;
         this.unsubscribe = unsubscribe;
     }
@@ -15,6 +15,10 @@ export class FilterSearchController {
     handleFilter = (e) => {
         this.notify('filter', e.target.id)
         this.unsubscribe('filter', this.handleFilter);
+    }
+
+    handleAll = () => {
+        this.notify('all');
     }
 
 }

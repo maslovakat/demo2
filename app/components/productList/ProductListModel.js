@@ -11,6 +11,10 @@ export class ProductListModel {
         this.link = "app/data/data.json";
     }
     
+    renderAll() {
+        return this.productList.map(el=>el);
+    }
+
     getProductList() {
         const ajax = new XMLHttpRequest();
 
