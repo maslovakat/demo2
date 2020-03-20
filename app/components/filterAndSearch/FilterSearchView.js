@@ -10,7 +10,7 @@ export class FilterSearchView {
         this.input = document.querySelector('.search');
         this.input.addEventListener('input', search);
         // don't remove
-        // this.input.addEventListener('change', (e) => e.target.value = '');
+        this.input.addEventListener('change', (e) => e.target.value = '');
 
     }
 
