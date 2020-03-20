@@ -5,7 +5,7 @@ export class ProductListController {
     
     constructor({subscribe}) {
         this.view = new ProductListView();
-        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this), this.handleLoadPages.bind(this));
+        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this));
         this.model.getProductList();
         
         this.subscribe = subscribe;
@@ -41,10 +41,5 @@ export class ProductListController {
     handlePagination = (where = 'next') => {
         const data = this.model.getPaginationData(where);
         this.view.renderList(data);
-    }
-
-    handleLoadPages () {
-        console.log('num = ', this.model.getPageNumber());
-        this.view.renderPageNum(this.model.getPageNumber());
     }
 }
