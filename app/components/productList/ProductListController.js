@@ -5,7 +5,7 @@ export class ProductListController {
     
     constructor({subscribe, notify}) {
         this.view = new ProductListView();
-        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this), this.handleAddToCartBtn, this.handleCardList);
+        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this), this.handleAddToCartBtn, this.handleCardList, this.handleAll.bind(this));
         this.model.getProductList();
         
         this.subscribe = subscribe;
@@ -13,8 +13,15 @@ export class ProductListController {
         this.subscribe('search', this.handleSearch);
         this.subscribe('filter', this.handleFilter);
         this.subscribe('sort', this.handleSort);
+        this.subscribe('pagination', this.handlePagination);
+        this.subscribe('all', this.handleAll);
     }
     
+    handleAll(arr) {
+        const wholeList = this.model.renderAll();
+        this.view.renderList(wholeList);
+    }
+
     handleLoadList(arr) {
         this.view.renderList(arr);
     }
@@ -46,5 +53,10 @@ export class ProductListController {
     handleSort = (e) => {
         const sortedList = this.model.sortedBy(e);
         this.view.renderList(sortedList);
+    }
+
+    handlePagination = (where = 'next') => {
+        const data = this.model.getPaginationData(where);
+        this.view.renderList(data);
     }
 }
