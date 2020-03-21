@@ -29,8 +29,13 @@ export class ProductListView {
             this.container.appendChild(productCard);
         });
     }
+
+    getList() {
+        return document.querySelectorAll('.add-to-card');
+    }
     
     createProductCard (prod) { // будет создавать карточки
+
         const card = document.createElement('div');
         
         card.className = 'card-wrapper col-12 col-md-6 col-lg-4 col-xl-4 pb-3';
@@ -48,7 +53,7 @@ export class ProductListView {
                                 <li class="list-group-item card-price">Price: $ ${prod.price}</li>
                             </ul>
                             <div class="card-body">
-                                <a href="#" class="card-link card-link_green">Add to Cart</a>
+                                <a href="#" id="${prod.id}" class="add-to-card card-link card-link_green">Add to Cart</a>
                                 <a href="#" class="card-link card-link_blue">Details</a>
                             </div>
                          </div>   

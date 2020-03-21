@@ -3,12 +3,13 @@ import { ProductListModel } from './ProductListModel.js';
 
 export class ProductListController {
     
-    constructor({subscribe}) {
+    constructor({subscribe, notify}) {
         this.view = new ProductListView();
-        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this));
+        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this), this.handleAddToCartBtn, this.handleCardList);
         this.model.getProductList();
         
         this.subscribe = subscribe;
+        this.notify = notify;
         this.subscribe('search', this.handleSearch);
         this.subscribe('filter', this.handleFilter);
         this.subscribe('sort', this.handleSort);
@@ -16,6 +17,16 @@ export class ProductListController {
     
     handleLoadList(arr) {
         this.view.renderList(arr);
+    }
+
+    handleCardList = () => {
+        let prodList = this.model.getCartList();
+        this.notify('prodList', prodList);
+    }
+    
+    handleAddToCartBtn = () => {
+        let cards = this.view.getList();
+        this.notify('cart', cards);
     }
 
     handleLoadNavList(obj) {

@@ -3,9 +3,11 @@ export class ProductListModel {
     filteredList;
     otherAnimals;
     
-    constructor(cback, handleLoadNavList) {
-        this.handleLoad = cback;
+    constructor(handleLoad, handleLoadNavList, handleAddToCartBtn, handleCardList) {
+        this.handleLoad = handleLoad;
         this.handleLoadNavList = handleLoadNavList;
+        this.handleAddToCartBtn = handleAddToCartBtn;
+        this.handleCardList = handleCardList;
         this.link = "app/data/data.json";
     }
     
@@ -18,10 +20,16 @@ export class ProductListModel {
                 el.age = this.getAge(el)
             });
             this.handleLoad(this.productList);
+            this.handleAddToCartBtn();
+            this.handleCardList();
             this.getSpeciesForNavigation();
         });
         ajax.open('GET', this.link);
         ajax.send();
+    }
+
+    getCartList() {
+        return this.productList;
     }
     
     getSpeciesForNavigation() {
