@@ -103,6 +103,5 @@ export class CartView {
 
         this.renderCartList();
         this.setBasketCounter();
-        console.log( localStorage.getItem('cart'))
     }
 }
