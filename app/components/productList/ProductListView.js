@@ -1,8 +1,9 @@
 export class ProductListView {
-    constructor() {
+    constructor(handleAddToCartBtn) {
         this.container = document.querySelector('.goods-wrapper');
         this.navbarNav = document.querySelector('.navbar-nav');
         this.loader = document.querySelector('#loader');
+        this.handleAddToCartBtn = handleAddToCartBtn;
 
     //    was here
     //     this.pageCurrent = document.querySelector('.page_current');
@@ -29,6 +30,7 @@ export class ProductListView {
     }
 
     renderList(arr) {
+        
         document.getElementById("loader").style.display = "none";
         this.container = document.querySelector('.goods-wrapper');
         this.container.innerHTML="";
@@ -37,6 +39,7 @@ export class ProductListView {
             let productCard = this.createProductCard(el);
             this.container.appendChild(productCard);
         });
+        this.handleAddToCartBtn();
     }
 
     getList() {

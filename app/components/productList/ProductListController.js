@@ -4,8 +4,8 @@ import { ProductListModel } from './ProductListModel.js';
 export class ProductListController {
     
     constructor({subscribe, notify}) {
-        this.view = new ProductListView();
-        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this), this.handleAddToCartBtn, this.handleCardList, this.handleAll.bind(this));
+        this.view = new ProductListView(this.handleAddToCartBtn);
+        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this), this.handleCardList, this.handleAll.bind(this));
         this.model.getProductList();
         
         this.subscribe = subscribe;

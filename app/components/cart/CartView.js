@@ -1,7 +1,9 @@
 export class CartView {
     productList;
+    btnList;
     countTotal = 0;
     cartList = [];
+
     constructor() {
         this.basketCounter = document.querySelector('.basket_counter');
         this.cartModalList = document.querySelector('.cart-table-body');
@@ -11,7 +13,8 @@ export class CartView {
     }
 
     addListenerForBtn = (cards) => {
-        cards.forEach(btn => btn.addEventListener('click', this.addToCart))
+        this.btnList = cards;
+        this.btnList.forEach(btn => btn.addEventListener('click', this.addToCart))
     }
 
     addToCart = (e) => {
@@ -46,7 +49,7 @@ export class CartView {
         let cartItems = ``;
         this.countTotal = 0;
         let listId;
-        
+
         if (localStorage.getItem('cart') === null) {
             listId = localStorage.getItem('cart')
         } else {
@@ -55,7 +58,6 @@ export class CartView {
                 let cartItem = this.productList.filter(e => e.id === +listId[i]);
                 this.cartList.push(cartItem[0]);
             }
-
         }
 
         if (this.cartList === []) {

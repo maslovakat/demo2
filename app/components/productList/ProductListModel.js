@@ -5,10 +5,9 @@ export class ProductListModel {
     paginationCount = 6;
     paginationPage = 1;
     
-    constructor(cback, handleLoadNavList, handleAddToCartBtn, handleCardList) {
+    constructor(cback, handleLoadNavList, handleCardList) {
         this.handleLoad = cback;
         this.handleLoadNavList = handleLoadNavList;
-        this.handleAddToCartBtn = handleAddToCartBtn;
         this.handleCardList = handleCardList;
         this.link = "app/data/data.json";
     }
@@ -27,7 +26,6 @@ export class ProductListModel {
                 el.age = this.getAge(el)
             });
             this.handleLoad(this.getPaginationData());
-            this.handleAddToCartBtn();
             this.handleCardList();
             this.getSpeciesForNavigation();
         });
@@ -100,7 +98,6 @@ export class ProductListModel {
             //return this.getPaginationData();
             return searchedList;
         }
-
         return this.getPaginationData();
     }
 
