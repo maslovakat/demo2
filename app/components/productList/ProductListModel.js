@@ -58,10 +58,6 @@ export class ProductListModel {
         return this.filteredList.slice(from, to);
     }
 
-    // getPageNumber() {
-    //     return this.paginationPage;
-    // }
-
     getSpeciesForNavigation() {
         let allSpecies = {};
         this.productList.forEach(e => {
@@ -122,6 +118,11 @@ export class ProductListModel {
         }
 
         return this.getPaginationData();
+    }
+
+    getCard(id = 1) {
+        //console.log('id = ', id);
+        return this.filteredList.find(card => card.id == id);
     }
 
     getAge(prod) {

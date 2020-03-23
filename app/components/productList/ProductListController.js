@@ -4,17 +4,16 @@ import { ProductListModel } from './ProductListModel.js';
 export class ProductListController {
     
     constructor({subscribe, notify}) {
-        this.view = new ProductListView(this.handleAddToCartBtn);
-        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this), this.handleCardList, this.handleAll.bind(this));
-        this.model.getProductList();
+        this.view = new ProductListView(this.handleAddToCartBtn, this.handleClickDetails, this.handleAll.bind(this));
+        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this), this.handleCardList);
         
+        this.model.getProductList();
         this.subscribe = subscribe;
         this.notify = notify;
         this.subscribe('search', this.handleSearch);
         this.subscribe('filter', this.handleFilter);
         this.subscribe('sort', this.handleSort);
         this.subscribe('pagination', this.handlePagination);
-        this.subscribe('all', this.handleAll);
     }
     
     handleAll(arr) {
@@ -58,5 +57,13 @@ export class ProductListController {
     handlePagination = (where = 'next') => {
         const data = this.model.getPaginationData(where);
         this.view.renderList(data);
+    }
+
+    handleClickDetails = (ev) => {
+        console.log('ev.target ==', ev.target.dataset.id);
+        const card = this.model.getCard(ev.target.dataset.id);
+        console.log('card =  ==', card);
+        this.notify('show-details', card);
+        console.log('this.notify =  ==', this.notify('show-details', card));
     }
 }

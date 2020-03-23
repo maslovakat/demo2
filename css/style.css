@@ -206,4 +206,49 @@ input {
 .page.disabled {
     opacity: 0.5;
 }
+/* ---modal---- */
+.my_modal {
+    display: none !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
 
+.my_content {
+    width: 500px;
+    height: 400px;
+}
+
+.modal-show {
+    display: flex !important;
+}
+
+.modal-header {
+    justify-content: center !important;
+}
+.modal-body{
+    padding: 1rem 1rem 0 1rem;
+}
+.modal-title {
+    text-transform: uppercase;
+    color: #007bff;
+}
+.modal-span {
+    color: black;
+    letter-spacing: 1px;
+    display: inline-block;
+    width: 75px;
+}
+.modal-price {
+    text-transform: uppercase;
+    color: black;
+    display: inline-block;
+    margin-right: 10px;
+}
+.card-info {
+    color: #4b5d6d;
+}
+.card-info-price {
+    color: #007bff;
+    font-size: 20px;
+}

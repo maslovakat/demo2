@@ -1,17 +1,15 @@
 export class ProductListView {
-    constructor(handleAddToCartBtn) {
+    constructor(handleAddToCartBtn, listener, listenerLogo) {
         this.container = document.querySelector('.goods-wrapper');
         this.navbarNav = document.querySelector('.navbar-nav');
         this.loader = document.querySelector('#loader');
         this.handleAddToCartBtn = handleAddToCartBtn;
-
-    //    was here
-    //     this.pageCurrent = document.querySelector('.page_current');
-    // }
-    //
-    // renderPageNum(num) {
-    //     console.log('this.pageCurrent.innerText = ', this.pageCurrent.innerText);
-    //     return this.pageCurrent.innerText = `${num}`;
+        this.petShop = document.querySelector('#petShop');
+        this.sortedBy = document.querySelector('#sortedBy');
+    
+        this.clickListener = listener;
+        console.log('this.clickListener = ', this.clickListener);
+        this.petShop.addEventListener('click', listenerLogo);
     }
 
     renderNavigationList(obj){
@@ -34,23 +32,31 @@ export class ProductListView {
         document.getElementById("loader").style.display = "none";
         this.container = document.querySelector('.goods-wrapper');
         this.container.innerHTML="";
+        // need to fixed
         arr.length === 0 ? this.container.innerHTML = 'Nothing was found' : null;
+        //delete previous listeners
+        this.container.querySelectorAll('.card-link_blue').forEach(btn => btn.removeEventListener('click', this.clickListener));
+        //render cards
         arr.forEach(el => {
             let productCard = this.createProductCard(el);
             this.container.appendChild(productCard);
         });
         this.handleAddToCartBtn();
+        //listener for details modal window
+        this.container.querySelectorAll('.card-link_blue').forEach(btn => btn.addEventListener('click', this.clickListener));
+        console.log('this.container.querySelectorAll(.card-link_blue) = ', this.container.querySelectorAll('.card-link_blue'));
     }
 
     getList() {
         return document.querySelectorAll('.add-to-card');
     }
-    
+
     createProductCard (prod) { // будет создавать карточки
 
         const card = document.createElement('div');
         
         card.className = 'card-wrapper col-12 col-md-6 col-lg-4 col-xl-4 pb-3';
+        card.dataset.id = prod.id;
         
         card.innerHTML = `<div class="card border-secondary h-100">  
                             <div class = "card-img-wrapper">    
@@ -66,9 +72,9 @@ export class ProductListView {
                             </ul>
                             <div class="card-body">
                                 <a href="#" id="${prod.id}" class="add-to-card card-link card-link_green">Add to Cart</a>
-                                <a href="#" class="card-link card-link_blue">Details</a>
+                                <a href="#" data-id="${prod.id}" class="card-link card-link_blue">Details</a>
                             </div>
-                         </div>   
+                        </div>   
                         `
         return card;
     };
