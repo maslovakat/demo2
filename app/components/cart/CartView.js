@@ -14,17 +14,25 @@ export class CartView {
 
     addListenerForBtn = (cards) => {
         this.btnList = cards;
-        this.btnList.forEach(btn => btn.addEventListener('click', this.addToCart))
+        this.btnList.forEach(btn => btn.addEventListener('click', this.addToCart));
     }
 
     addToCart = (e) => {
         e.preventDefault();
 
         let list = localStorage.getItem('cart');
+        let isExist;
 
-        list === null ?
-            list = `${e.target.id}` :
+        if (list === null) {
+            list = `${e.target.id}`;
+        } else {
+            // check is it repeated item?
+            isExist = list.split(',').find(el => el === e.target.id);
+            if (isExist) {
+                return list;
+            }
             list += `,${e.target.id}`;
+        }
 
         localStorage.setItem('cart', list);
         this.basketCounter.innerText++;
@@ -71,8 +79,6 @@ export class CartView {
             </td>
             <td>${item.species}${item.breed}</td>
             <td>${item.price}$</td>
-            <td class="qty">1</td>
-            <td class="item-total-price">${item.price}$</td>
             <td>
                 <a href="#" class="delete-item btn btn-danger btn-sm">
                     <i class="fa fa-times"></i>
