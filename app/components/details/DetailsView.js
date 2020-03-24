@@ -4,7 +4,7 @@ export class DetailsView {
         console.log('this.modal = ', this.modal);
         this.content = document.querySelector('.my_content');
         console.log('this.contant = ', this.contant);
-        this.showClass = '.modal-show';
+        this.showClass = 'modal-show';
         this.modal.addEventListener('click', listener);
     };
 
