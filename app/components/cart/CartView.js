@@ -4,7 +4,8 @@ export class CartView {
     countTotal = 0;
     cartList = [];
 
-    constructor() {
+    constructor(handleCartList) {
+        this.handleCartList = handleCartList;
         this.basketCounter = document.querySelector('.basket_counter');
         this.cartModalList = document.querySelector('.cart-table-body');
         this.totalPrice = document.querySelector('.total-price');
@@ -52,6 +53,10 @@ export class CartView {
         this.renderCartList();
     }
 
+    getCartList = () => {
+        return this.cartList;
+    }
+
     renderCartList = () => {
         this.cartList = [];
         let cartItems = ``;
@@ -67,6 +72,8 @@ export class CartView {
                 this.cartList.push(cartItem[0]);
             }
         }
+
+        this.handleCartList();
 
         if (this.cartList === []) {
             cartItems = '';
