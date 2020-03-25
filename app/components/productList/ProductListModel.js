@@ -89,7 +89,7 @@ export class ProductListModel {
     }
 
     searched () {
-        console.log('str = ', this.lastSearch);
+        //console.log('str = ', this.lastSearch);
         if (this.lastSearch && this.lastSearch.trim() !== "") {
             const regSearch = new RegExp(this.lastSearch, 'i');
             this.filteredList = this.filteredList.filter(({breed}) => regSearch.test(breed));
