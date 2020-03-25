@@ -51,7 +51,7 @@ export class ProductListController {
     }
 
     handleSort = (e) => {
-        this.model.lastSort= str;
+        this.model.lastSort= e;
         this.view.renderList(this.model.searchAndFiltered());
     }
 

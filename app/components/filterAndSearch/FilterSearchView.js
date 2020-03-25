@@ -2,9 +2,9 @@ export class FilterSearchView {
     constructor(search, filter, all) {
         // filter by category
         this.navbarNav = document.querySelector('.navbar-nav');
-        console.log('this.navbarNav.children.length = ', this.navbarNav.children.length);
+        //console.log('this.navbarNav.children.length = ', this.navbarNav.children.length);
         this.navItems = document.getElementsByClassName('.my-link');
-        console.log('this.navItems = ', this.navItems);
+        //console.log('this.navItems = ', this.navItems);
 
         // this.nodeList = document.querySelectorAll('.nav-item .my-link');
         // this.navArray = Array.from(this.nodeList);
