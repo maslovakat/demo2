@@ -75,15 +75,14 @@ export class ProductListModel {
 
     filtered (id) {
         this.paginationPage = 1;
-        this.filteredList = this.productList;
         this.sortedBy(this.lastSort);
-
+        if (!id) return;
         if(id === 'other') {
             this.filteredList = this.productList.filter((el) => {
                 return this.otherAnimals.find((e) => e === el.species);
             });
         } else {
-            this.filteredList = this.productList.filter((el) => el.species === id);
+            this.filteredList = this.filteredList.filter((el) => el.species === id);
         }
         this.lastFilter = id;
 
@@ -92,6 +91,7 @@ export class ProductListModel {
 
     searched (str) {
         this.paginationPage = 1;
+        console.log('str = ', str);
         if (str.trim() !== "") {
             this.filteredList = this.productList;
             this.sortedBy(this.lastSort);
@@ -104,9 +104,8 @@ export class ProductListModel {
 
     sortedBy(str) {
         this.paginationPage = 1;
-        const sortedBy = str;
-        //this.lastSort = str ? str : 'default';
-        this.lastSort = str;
+        const sortedBy = str ? str : 'default';
+        this.lastSort = str ? str : 'default';
 
         switch (sortedBy) {
             case 'price low':
