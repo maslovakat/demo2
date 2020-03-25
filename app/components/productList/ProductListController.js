@@ -19,8 +19,7 @@ export class ProductListController {
     }
     
     handleAll = () => {
-        const wholeList = this.model.renderAll();
-        this.view.renderList(wholeList);
+        this.view.renderList(this.model.renderAll());
     }
 
     handleLoadList(arr) {
@@ -42,23 +41,22 @@ export class ProductListController {
     }
 
     handleFilter = (id) => {
-        const filteredList = this.model.filtered(id);
-        this.view.renderList(filteredList);
+        this.model.lastFilter = id;
+        this.view.renderList(this.model.searchAndFiltered());
     }
 
     handleSearch = (str) => {
-        const searchList = this.model.searched(str);
-        this.view.renderList(searchList);
+        this.model.lastSearch = str;
+        this.view.renderList(this.model.searchAndFiltered());
     }
 
     handleSort = (e) => {
-        const sortedList = this.model.sortedBy(e);
-        this.view.renderList(sortedList);
+        this.model.lastSort= str;
+        this.view.renderList(this.model.searchAndFiltered());
     }
 
     handlePagination = (where = 'next') => {
-        const data = this.model.getPaginationData(where);
-        this.view.renderList(data);
+        this.view.renderList(this.model.getPaginationData(where));
     }
 
     handleClickDetails = (ev) => {

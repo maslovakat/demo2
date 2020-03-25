@@ -4,6 +4,7 @@ export class ProductListModel {
     otherAnimals;
     lastFilter; // membered last filter configuration
     lastSort;  // membered last sort configuration
+    lastSearch;
     paginationCount = 6;
     paginationPage = 1;
     
@@ -13,9 +14,12 @@ export class ProductListModel {
         this.handleCardList = handleCardList;
         this.link = "app/data/data.json";
     }
-    
+
     renderAll() {
-        this.filteredList = this.productList.map(el=>el);
+        this.lastFilter = "";
+        this.lastSearch = "";
+        this.lastSort = "";
+        this.filteredList = this.productList;
         return this.getPaginationData();
     }
 
@@ -73,40 +77,27 @@ export class ProductListModel {
         this.handleLoadNavList(allSpecies);
     }
 
-    filtered (id) {
-        this.paginationPage = 1;
-        //this.filteredList = this.productList;
-        this.sortedBy(this.lastSort);
-        if (!id) return;
-        if(id === 'other') {
+    filtered () {
+        if(!this.lastFilter) return;
+        if(this.lastFilter === 'other') {
             this.filteredList = this.productList.filter((el) => {
                 return this.otherAnimals.find((e) => e === el.species);
             });
         } else {
-            this.filteredList = this.filteredList.filter((el) => el.species === id);
+            this.filteredList = this.filteredList.filter((el) => el.species === this.lastFilter);
         }
-        this.lastFilter = id;
-
-        return this.getPaginationData();
     }
 
-    searched (str) {
-        this.paginationPage = 1;
-        console.log('str = ', str);
-        if (str.trim() !== "") {
-            this.filteredList = this.productList;
-            this.sortedBy(this.lastSort);
-            this.filtered(this.lastFilter);
-            const regSearch = new RegExp(str, 'i');
+    searched () {
+        console.log('str = ', this.lastSearch);
+        if (this.lastSearch && this.lastSearch.trim() !== "") {
+            const regSearch = new RegExp(this.lastSearch, 'i');
             this.filteredList = this.filteredList.filter(({breed}) => regSearch.test(breed));
         }
-        return this.getPaginationData();
     }
 
-    sortedBy(str) {
-        this.paginationPage = 1;
-        const sortedBy = str ? str : 'default';
-        this.lastSort = str ? str : 'default';
+    sortedBy() {
+        const sortedBy = this.lastSort ? this.lastSort : 'default';
 
         switch (sortedBy) {
             case 'price low':
@@ -123,7 +114,13 @@ export class ProductListModel {
                 break;
             default: this.filteredList.sort((a, b) => a.price - b.price);
         }
+    }
 
+    searchAndFiltered(){
+        this.filteredList = this.productList;
+        this.filtered();
+        this.searched();
+        this.sortedBy();
         return this.getPaginationData();
     }
 
