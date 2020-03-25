@@ -16,7 +16,11 @@ export class FilterSearchView {
         this.navbarNav.addEventListener('click', filter);
         // render productList after clicking brand "petShop"
         this.petShop = document.querySelector('#petShop');
-        this.petShop.addEventListener('click', all);
+        this.input = document.querySelector('.search');
+        this.petShop.addEventListener('click', () => {
+            all();
+            this.input.value = '';
+        });
         // search by breed
         this.input = document.querySelector('.search');
         this.input.addEventListener('input', search);

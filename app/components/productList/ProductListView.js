@@ -3,6 +3,7 @@ export class ProductListView {
         this.container = document.querySelector('.goods-wrapper');
         this.navbarNav = document.querySelector('.navbar-nav');
         this.loader = document.querySelector('#loader');
+        this.input = document.querySelector('.search');
 
         this.handleAddToCartBtn = handleAddToCartBtn;
         this.clickListener = listener;

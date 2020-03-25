@@ -16,7 +16,7 @@ export class FilterSearchController {
     }
 
     handleAll = () => {
-        this.notify('all');
+        this.notify('all', );
     }
 
 }
