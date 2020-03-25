@@ -28,7 +28,7 @@ export class ProductListController {
     }
 
     handleCardList = () => {
-        let prodList = this.model.getCartList();
+        let prodList = this.model.getCardList();
         this.notify('prodList', prodList);
     }
     

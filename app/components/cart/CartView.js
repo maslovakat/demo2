@@ -1,27 +1,25 @@
 export class CartView {
-    productList;
-    btnList;
-    countTotal = 0;
-    cartList = [];
+    constructor(handleNotifyCartList, handleAddToCart, handleDeleteItem, handleRemoveCartFromLocalStorage, handleRerenderCart, handleUpdateLocalStorageCart) {
+        this.handleNotifyCartList = handleNotifyCartList;
+        this.handleAddToCart = handleAddToCart;
+        this.handleDeleteItem = handleDeleteItem;
+        this.handleRemoveCartFromLocalStorage = handleRemoveCartFromLocalStorage;
+        this.handleRerenderCart = handleRerenderCart;
+        this.handleUpdateLocalStorageCart = handleUpdateLocalStorageCart;
 
-    constructor(handleCartList) {
-        this.handleCartList = handleCartList;
         this.basketCounter = document.querySelector('.basket_counter');
         this.cartModalList = document.querySelector('.cart-table-body');
         this.totalPrice = document.querySelector('.total-price');
-
-        this.setBasketCounter()
     }
 
     addListenerForBtn = (cards) => {
         this.btnList = cards;
-        this.btnList.forEach(btn => btn.addEventListener('click', this.addToCart));
+        this.btnList.forEach(btn => btn.addEventListener('click', this.handleAddToCart));
     }
 
-    addToCart = (e) => {
+    addToCart = (e, list) => {
         e.preventDefault();
-
-        let list = localStorage.getItem('cart');
+        
         let isExist;
 
         if (list === null) {
@@ -35,88 +33,76 @@ export class CartView {
             list += `,${e.target.id}`;
         }
 
-        localStorage.setItem('cart', list);
         this.basketCounter.innerText++;
-        this.renderCartList();
+        return list;
     };
 
-    setBasketCounter = () => {
-        let list = localStorage.getItem('cart');
-
+    setBasketCounter = (list) => {
         list === null ?
             this.basketCounter.innerText = 0 :
-            this.basketCounter.innerText = localStorage.getItem('cart').split(',').length;
-    }
-
-    showBasketList = (cards) => {
-        this.productList = cards;
-        this.renderCartList();
+            this.basketCounter.innerText = list.split(',').length;
     }
 
     getCartList = () => {
         return this.cartList;
     }
 
-    renderCartList = () => {
-        this.cartList = [];
+    renderCartList = (listId, productList) => {
+        let cartList = [];
         let cartItems = ``;
-        this.countTotal = 0;
-        let listId;
+        let countTotal = 0;
 
-        if (localStorage.getItem('cart') === null) {
-            listId = localStorage.getItem('cart')
+        if (listId === null) {
+            listId;
         } else {
-            listId = localStorage.getItem('cart').split(',');
+            listId = listId.split(',');
             for (let i = 0; i < listId.length; i++) {
-                let cartItem = this.productList.filter(e => e.id === +listId[i]);
-                this.cartList.push(cartItem[0]);
+                let cartItem = productList.filter(e => e.id === +listId[i]);
+                cartList.push(cartItem[0]);
             }
         }
 
-        this.handleCartList();
+        this.handleNotifyCartList(cartList);
 
-        if (this.cartList === []) {
+        if (cartList === []) {
             cartItems = '';
         } else {
-            this.cartList.forEach((item, index) => {
+            cartList.forEach((item, index) => {
                 cartItems += `<tr id="${index}">
-            <td class="w-25">
-                <img src="${item.image}"
-                    class="img-fluid img-thumbnail">
-            </td>
-            <td>${item.species}${item.breed}</td>
-            <td>${item.price}$</td>
-            <td>
-                <a href="#" class="delete-item btn btn-danger btn-sm">
-                    <i class="fa fa-times"></i>
-                </a>
-            </td>
-            </tr>`
+                <td class="w-25">
+                    <img src="${item.image}"
+                        class="img-fluid img-thumbnail">
+                </td>
+                <td>${item.species}${item.breed}</td>
+                <td>${item.price}$</td>
+                <td>
+                    <a href="#" class="delete-item btn btn-danger btn-sm">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </td>
+                </tr>`
 
-                this.countTotal += item.price;
+            countTotal += item.price;
             });
         }
 
-
         this.cartModalList.innerHTML = cartItems;
-        this.totalPrice.innerText = `${this.countTotal}$`
+        this.totalPrice.innerText = `${countTotal}$`
 
         let deleteItemBtn = document.querySelectorAll('.delete-item');
-        deleteItemBtn.forEach(el => el.addEventListener('click', () => this.deleteItem(el)))
+        deleteItemBtn.forEach(el => el.addEventListener('click', () => this.handleDeleteItem(el)))
     }
 
-    deleteItem(el) {
-        let listId = localStorage.getItem('cart').split(',');
+    deleteItem(el, listId) {
+        listId = listId.split(',');
 
         if (listId.length === 1) {
-            localStorage.removeItem('cart')
+            this.handleRemoveCartFromLocalStorage();
         } else {
-            listId.splice(el.parentNode.parentNode.id, 1)
-            listId.join(',');
-            localStorage.setItem('cart', listId.join(','));
+            listId.splice(el.parentNode.parentNode.id, 1);
+            this.handleUpdateLocalStorageCart(listId.join(','));
         }
 
-        this.renderCartList();
-        this.setBasketCounter();
+        this.handleRerenderCart();
     }
 }

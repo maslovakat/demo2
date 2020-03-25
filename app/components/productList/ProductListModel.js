@@ -36,7 +36,7 @@ export class ProductListModel {
         ajax.send();
     }
 
-    getCartList() {
+    getCardList = () => {
         return this.productList;
     }
     
