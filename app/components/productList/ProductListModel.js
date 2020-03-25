@@ -2,6 +2,8 @@ export class ProductListModel {
     productList;
     filteredList;
     otherAnimals;
+    lastFilter; // membered last filter configuration
+    lastSort;  // membered last sort configuration
     paginationCount = 6;
     paginationPage = 1;
     
@@ -13,7 +15,8 @@ export class ProductListModel {
     }
     
     renderAll() {
-        return this.productList.map(el=>el);
+        this.filteredList = this.productList.map(el=>el);
+        return this.getPaginationData();
     }
 
     getProductList() {
@@ -70,29 +73,31 @@ export class ProductListModel {
         this.handleLoadNavList(allSpecies);
     }
 
-    filterAndSearch(id, str, isFilter) {
+    filtered (id) {
         this.paginationPage = 1;
+        this.filteredList = this.productList;
+        this.sortedBy(this.lastSort);
 
-        if (isFilter) {
-            if(id === 'other') {
-                this.filteredList = this.productList.filter((el) => {
-                    let filteredItem;
-                    this.otherAnimals.forEach((e) => e === el.species ? filteredItem = el.species : null);
-                    return filteredItem;
-                });
-            }else if (id === 'petShop') {
-                this.filteredList = this.productList;
-            }else{
-                this.filteredList = this.productList.filter((el) => el.species === id);
-            }
-        }else{
-            let searchedList = this.filteredList;
+        if(id === 'other') {
+            this.filteredList = this.productList.filter((el) => {
+                return this.otherAnimals.find((e) => e === el.species);
+            });
+        } else {
+            this.filteredList = this.productList.filter((el) => el.species === id);
+        }
+        this.lastFilter = id;
+
+        return this.getPaginationData();
+    }
+
+    searched (str) {
+        this.paginationPage = 1;
+        if (str.trim() !== "") {
+            this.filteredList = this.productList;
+            this.sortedBy(this.lastSort);
+            this.filtered(this.lastFilter);
             const regSearch = new RegExp(str, 'i');
-            searchedList = searchedList.filter(({breed}) => regSearch.test(breed));
-            //this.filteredList = searchedList;
-            
-            //return this.getPaginationData();
-            return searchedList;
+            this.filteredList = this.filteredList.filter(({breed}) => regSearch.test(breed));
         }
         return this.getPaginationData();
     }
@@ -100,6 +105,8 @@ export class ProductListModel {
     sortedBy(str) {
         this.paginationPage = 1;
         const sortedBy = str;
+        //this.lastSort = str ? str : 'default';
+        this.lastSort = str;
 
         switch (sortedBy) {
             case 'price low':
@@ -121,7 +128,6 @@ export class ProductListModel {
     }
 
     getCard(id = 1) {
-        //console.log('id = ', id);
         return this.filteredList.find(card => card.id == id);
     }
 

@@ -4,7 +4,7 @@ import { ProductListModel } from './ProductListModel.js';
 export class ProductListController {
     
     constructor({subscribe, notify}) {
-        this.view = new ProductListView(this.handleAddToCartBtn, this.handleClickDetails, this.handleAll.bind(this));
+        this.view = new ProductListView(this.handleAddToCartBtn, this.handleClickDetails);
         this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this), this.handleCardList);
         
         this.model.getProductList();
@@ -13,10 +13,12 @@ export class ProductListController {
         this.subscribe('search', this.handleSearch);
         this.subscribe('filter', this.handleFilter);
         this.subscribe('sort', this.handleSort);
+        this.subscribe('all', this.handleAll);
         this.subscribe('pagination', this.handlePagination);
+
     }
     
-    handleAll(arr) {
+    handleAll = () => {
         const wholeList = this.model.renderAll();
         this.view.renderList(wholeList);
     }
@@ -40,12 +42,12 @@ export class ProductListController {
     }
 
     handleFilter = (id) => {
-        const filteredList = this.model.filterAndSearch(id, null, true);
+        const filteredList = this.model.filtered(id);
         this.view.renderList(filteredList);
     }
 
     handleSearch = (str) => {
-        const searchList = this.model.filterAndSearch(null, str);
+        const searchList = this.model.searched(str);
         this.view.renderList(searchList);
     }
 
@@ -60,10 +62,7 @@ export class ProductListController {
     }
 
     handleClickDetails = (ev) => {
-        console.log('ev.target ==', ev.target.dataset.id);
         const card = this.model.getCard(ev.target.dataset.id);
-        console.log('card =  ==', card);
         this.notify('show-details', card);
-        console.log('this.notify =  ==', this.notify('show-details', card));
     }
 }

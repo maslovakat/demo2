@@ -30,7 +30,8 @@ input {
 }
 .nav .nav-link:hover,
 .nav .nav-link:active,
-.nav .nav-link:focus-within {
+.nav .nav-link:focus-within,
+.nav-active {
     color: #343a40;
     background: rgba(255,255,255,.75);;
     text-transform: uppercase;

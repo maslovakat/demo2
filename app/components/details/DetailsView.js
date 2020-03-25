@@ -1,9 +1,7 @@
 export class DetailsView {
     constructor(listener) {
         this.modal = document.querySelector('.my_modal');
-        console.log('this.modal = ', this.modal);
         this.content = document.querySelector('.my_content');
-        console.log('this.contant = ', this.contant);
         this.showClass = 'modal-show';
         this.modal.addEventListener('click', listener);
     };

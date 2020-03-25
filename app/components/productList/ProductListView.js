@@ -1,36 +1,31 @@
 export class ProductListView {
-    constructor(handleAddToCartBtn, listener, listenerLogo) {
+    constructor(handleAddToCartBtn, listener) {
         this.container = document.querySelector('.goods-wrapper');
         this.navbarNav = document.querySelector('.navbar-nav');
         this.loader = document.querySelector('#loader');
+
         this.handleAddToCartBtn = handleAddToCartBtn;
-        this.petShop = document.querySelector('#petShop');
-        this.sortedBy = document.querySelector('#sortedBy');
-    
         this.clickListener = listener;
-        console.log('this.clickListener = ', this.clickListener);
-        this.petShop.addEventListener('click', listenerLogo);
     }
 
     renderNavigationList(obj){
         let otherList = [];
-        for(let i in obj){
+        for(let i in obj) {
             obj[i] > 3 ? this.navbarNav.insertAdjacentHTML('beforeend', 
             `<li class="nav-item menu-item menu-item-cats">
-                <a class="nav-link" id="${i}" href="#">${i}</a>
+                <a class="nav-link my-link" id="${i}" href="#">${i}</a>
             </li>`) : otherList.push(i);
         }
         this.navbarNav.insertAdjacentHTML('beforeend', 
             `<li class="nav-item menu-item menu-item-cats">
-                <a class="nav-link" id="other" href="#">other</a>
+                <a class="nav-link my-link" id="other" href="#">other</a>
             </li>`)
             return otherList
     }
 
     renderList(arr) {
-        
-        document.getElementById("loader").style.display = "none";
-        this.container = document.querySelector('.goods-wrapper');
+        //loader hide
+        this.loader.style.display = "none";
         this.container.innerHTML="";
         // need to fixed
         arr.length === 0 ? this.container.innerHTML = 'Nothing was found' : null;
@@ -44,7 +39,6 @@ export class ProductListView {
         this.handleAddToCartBtn();
         //listener for details modal window
         this.container.querySelectorAll('.card-link_blue').forEach(btn => btn.addEventListener('click', this.clickListener));
-        console.log('this.container.querySelectorAll(.card-link_blue) = ', this.container.querySelectorAll('.card-link_blue'));
     }
 
     getList() {
