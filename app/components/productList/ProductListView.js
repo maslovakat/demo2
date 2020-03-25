@@ -13,12 +13,12 @@ export class ProductListView {
         let otherList = [];
         for(let i in obj) {
             obj[i] > 3 ? this.navbarNav.insertAdjacentHTML('beforeend', 
-            `<li class="nav-item menu-item menu-item-cats">
+            `<li class="nav-item menu-item">
                 <a class="nav-link my-link" id="${i}" href="#">${i}</a>
             </li>`) : otherList.push(i);
         }
         this.navbarNav.insertAdjacentHTML('beforeend', 
-            `<li class="nav-item menu-item menu-item-cats">
+            `<li class="nav-item menu-item">
                 <a class="nav-link my-link" id="other" href="#">other</a>
             </li>`)
             return otherList
