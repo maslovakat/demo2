@@ -75,6 +75,7 @@ export class ProductListModel {
 
     filtered (id) {
         this.paginationPage = 1;
+        //this.filteredList = this.productList;
         this.sortedBy(this.lastSort);
         if (!id) return;
         if(id === 'other') {

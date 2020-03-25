@@ -217,7 +217,7 @@ input {
 
 .my_content {
     width: 500px;
-    height: 400px;
+    height: 700px;
 }
 
 .modal-show {
@@ -249,6 +249,11 @@ input {
 .card-info {
     color: #4b5d6d;
 }
+.card-info, .card-info-price {
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
 .card-info-price {
     color: #007bff;
     font-size: 20px;

@@ -6,7 +6,7 @@ export class DetailsView {
         this.modal.addEventListener('click', listener);
     };
 
-    show({id, breed, species, name, gender, age, hair, price}) {
+    show({id, image, breed, species, name, gender, age, hair, price}) {
         this.content.innerHTML = `
             <div class="modal-header">
                 <h5 class="modal-title justify-content-center">${breed}</h5>
@@ -15,6 +15,9 @@ export class DetailsView {
                 </button>
             </div>
             <div class="modal-body">
+                <div class = "card-img-wrapper"> 
+                    <img src="${image}" class="card-img-top" alt="...">
+                </div>
                 <p class="card-info"><span class = 'modal-span'>species: </span>${species}</p>
                 <p class="card-info"><span class = 'modal-span'>name: </span>${name}</p>
                 <p class="card-info"><span class = 'modal-span'>gender: </span>${gender}</p>
