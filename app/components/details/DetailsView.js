@@ -23,7 +23,7 @@ export class DetailsView {
                 <p class="card-info"><span class = 'modal-span'>gender: </span>${gender}</p>
                 <p class="card-info"><span class = 'modal-span'>age: </span>${age}</p>
                 <p class="card-info"><span class = 'modal-span'>hair: </span>${hair}</p>
-                <p class="card-info-price"><span class = 'modal-price'>price: </span>${price} UAH</p>
+                <p class="card-info-price"><span class = 'modal-price'>price: </span>$${price}</p>
             </div>
             <div class="modal-footer">
 			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
