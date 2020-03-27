@@ -4,6 +4,8 @@ export class ProductListView {
         this.navbarNav = document.querySelector('.navbar-nav');
         this.loader = document.querySelector('#loader');
         this.input = document.querySelector('.search');
+        this.first = document.querySelectorAll('.first');
+        this.last = document.querySelectorAll('.last');
 
         this.handleAddToCartBtn = handleAddToCartBtn;
         this.clickListener = listener;
@@ -73,4 +75,11 @@ export class ProductListView {
                         `
         return card;
     };
+
+    showPages(current, last) {
+        this.first.forEach(el => el.innerHTML = `${current}`);
+        this.last.forEach(el => el.innerHTML = `${last}`);
+        // console.log('curent view = ', current);
+        // console.log('max page view = ', last);
+    }
 }

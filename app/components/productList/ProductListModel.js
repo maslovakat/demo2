@@ -8,10 +8,11 @@ export class ProductListModel {
     paginationCount = 6;
     paginationPage = 1;
     
-    constructor(cback, handleLoadNavList, handleCardList) {
+    constructor(cback, handleLoadNavList, handleCardList, handlePages) {
         this.handleLoad = cback;
         this.handleLoadNavList = handleLoadNavList;
         this.handleCardList = handleCardList;
+        this.handlePages = handlePages;
         this.link = "app/data/data.json";
     }
 
@@ -61,6 +62,9 @@ export class ProductListModel {
 
         const from = (this.paginationPage - 1) * this.paginationCount;
         const to = this.paginationPage * this.paginationCount;
+        this.currentPage = Math.ceil(from/this.paginationCount) + 1;
+        this.maxPage = Math.ceil(this.filteredList.length/this.paginationCount);
+        this.handlePages(this.currentPage, this.maxPage);
 
         return this.filteredList.slice(from, to);
     }
@@ -89,7 +93,6 @@ export class ProductListModel {
     }
 
     searched () {
-        //console.log('str = ', this.lastSearch);
         if (this.lastSearch && this.lastSearch.trim() !== "") {
             const regSearch = new RegExp(this.lastSearch, 'i');
             this.filteredList = this.filteredList.filter(({breed}) => regSearch.test(breed));

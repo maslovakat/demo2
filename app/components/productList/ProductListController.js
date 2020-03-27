@@ -5,7 +5,7 @@ export class ProductListController {
     
     constructor({subscribe, notify}) {
         this.view = new ProductListView(this.handleAddToCartBtn, this.handleClickDetails);
-        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this), this.handleCardList);
+        this.model = new ProductListModel(this.handleLoadList.bind(this), this.handleLoadNavList.bind(this), this.handleCardList, this.handlePages);
         
         this.model.getProductList();
         this.subscribe = subscribe;
@@ -57,6 +57,13 @@ export class ProductListController {
 
     handlePagination = (where = 'next') => {
         this.view.renderList(this.model.getPaginationData(where));
+        this.handlePages();
+    }
+
+    handlePages = (cur, end) => {
+        const current = this.model.currentPage;
+        const last = this.model.maxPage;
+        this.view.showPages(current,last);
     }
 
     handleClickDetails = (ev) => {
