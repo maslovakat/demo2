@@ -207,6 +207,19 @@ input {
 .page.disabled {
     opacity: 0.5;
 }
+.span{
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.first {
+    margin-left: 10px;
+}
+.last {
+    margin-right: 10px;
+}
 /* ---modal---- */
 .my_modal {
     display: none !important;
