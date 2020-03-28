@@ -12,12 +12,8 @@ export class ProductListModel {
         this.handleLoad = cback;
         this.handleLoadNavList = handleLoadNavList;
         this.handleCardList = handleCardList;
-<<<<<<< HEAD:common/components/productList/ProductListModel.js
-        this.link = "http://127.0.0.1:4000/products";
-=======
         this.handlePages = handlePages;
-        this.link = "app/data/data.json";
->>>>>>> 8f8fcf8817352dc27aa1ba3bdbbf98931c36266e:app/components/productList/ProductListModel.js
+        this.link = "http://127.0.0.1:4000/products";
     }
 
     renderAll() {
