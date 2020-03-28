@@ -1,0 +1,32 @@
+{
+  "name": "demo2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maslovakat/demo2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maslovakat/demo2/issues"
+  },
+  "homepage": "https://github.com/maslovakat/demo2#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "joi": "^14.3.1",
+    "nodemon": "^2.0.2",
+    "pg": "^7.18.2",
+    "sequelize": "^5.21.5"
+  },
+  "devDependencies": {
+    "@types/sequelize": "^4.28.8",
+    "sequelize-cli": "^5.5.1"
+  }
+}

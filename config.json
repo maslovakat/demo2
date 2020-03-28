@@ -1,0 +1,14 @@
+{
+    "db": {
+      "name": "demo2",
+      "user": "postgres",
+      "password": "topdev",
+      "host": "127.0.0.1",
+      "port": 5432,
+      "dialect": "postgres"
+    },
+    "auth": {
+      "secretOrKey": "some-secret",
+      "expiresIn": 360000
+    }
+}
