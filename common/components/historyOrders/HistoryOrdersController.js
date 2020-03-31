@@ -8,14 +8,7 @@ export class HistoryOrdersController {
 
         this.subscribe = subscribe;
 
-        this.subscribe('makeOrder', this.handleGetData);
         this.subscribe('afterOrder', this.handleMakeHistory);
-        //this.subscribe('show-history', this.showHistory);
-    }
-
-    // get data from MakeOrder
-    handleGetData = (data) => {
-        this.model.getData(data);
     }
 
     handleMakeHistory = () => {
@@ -23,7 +16,6 @@ export class HistoryOrdersController {
     }
 
     showHistory = () => {
-        //const list = this.model.getLocalHistory();
         this.view.showModal(this.model.getLocalHistory());
     }
 }

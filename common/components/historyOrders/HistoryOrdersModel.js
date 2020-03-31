@@ -1,11 +1,6 @@
 export class HistoryOrdersModel {
     constructor() {
-        this.orderData = [];
         this.historyOrders = [];
-    }
-
-    getData = (data) => {
-        this.orderData = data;
     }
 
     getLocalOrder = () => {
