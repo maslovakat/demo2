@@ -12,21 +12,44 @@ export class MakeOrderModel {
     }
 
 
-    makeOrder = (fields) => {
-        const data = {
+    async makeOrder(fields) {
+        let idList = [];
+        this.cartList.forEach(e => idList.push(e.id))
+
+        let data = {
             name: fields[0].value,
             email: fields[1].value,
             phone: fields[2].value,
-            products: this.cartList
+            products: idList
         }
 
+
         if (this.isDataValid(fields)) {
+            data = JSON.stringify(data);
             localStorage.removeItem('cart');
-            localStorage.setItem('orderData', JSON.stringify(data));
+            // localStorage.setItem('orderData', data);
             this.handleRerenderCart();
+            console.log(data);
+
+            // try {
+            //     let response = await fetch('http://127.0.0.1:4000/orders', {
+            //         method: 'POST',
+            //         headers: {
+            //             'Accept': 'application/json',
+            //             'Content-Type': 'application/json;charset=utf-8'
+            //         },
+            //         body: data
+            //     })
+            //     let content = await response.json();
+            //     console.log(`response : ${content}`)
+            // } catch (err) {
+            //     console.log(err)
+            // }
+
             return true;
         }
     }
+
 
     // validate fields
     isDataValid = (fields) => {

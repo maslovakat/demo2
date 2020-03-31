@@ -22,4 +22,4 @@ const ProductModel = Product.init({
 }, {sequelize, modelName: 'Product'});
 
 
-module.exports = { ProductModel };
+module.exports =  ProductModel ;

@@ -1,8 +1,8 @@
-const { ProductModel } = require('./products.model');
+const ProductModel = require('./products.model');
 
 class ProductService {
-    async findMany() {
-        return ProductModel.findAll();
+    async findMany(params) {
+        return ProductModel.findAll(params);
     }
 }
 
