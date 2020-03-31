@@ -26,7 +26,7 @@
 </head>
 
 <body>
-	<!-- modal window -->
+	<!-- modal window details-->
 	<div class="modal my_modal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content my_content">
@@ -76,6 +76,12 @@
 					<!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
 				</form>
+				<!-- order history list -->
+				<div class="history d-flex align-items-center">
+					<a href="#" class="history_btn" data-target="#historyModal">
+						<i class="far fa-folder-open"></i>
+					</a>
+				</div>
 				<!-- basket -->
 				<div class="basket d-flex align-items-center">
 					<span class="basket_counter d-flex align-items-center justify-content-center">0</span>
@@ -153,6 +159,42 @@
 										data-toggle="modal">Order</button>
 								</div>
 							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- modal window for orders history -->
+			<div class="modal my_modal bd-example-modal-lg" id="historyModal" aria-labelledby="myLargeModalLabel" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<!-- Modal content-->
+					<div class="modal-content history-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Order history</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<table class="table table-image">
+								<thead>
+									<tr>
+										<th scope="col">№</th>
+										<th scope="col">Pet</th>
+										<th scope="col">Name</th>
+										<th scope="col">Quantity</th>
+										<th scope="col">Price</th>
+										<th scope="col">Status</th>
+									</tr>
+								</thead>
+								<tbody class='history-table-body'>
+								</tbody>
+							</table>
+<!--							<div class="d-flex justify-content-end">-->
+<!--								<h5>Total: <span class="history-price text-success"></span></h5>-->
+<!--							</div>-->
+						</div>
+						<div class="modal-footer border-top-0 d-flex justify-content-between">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 						</div>
 					</div>
 				</div>

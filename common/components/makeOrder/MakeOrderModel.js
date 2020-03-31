@@ -11,7 +11,6 @@ export class MakeOrderModel {
         this.cartList = cards;
     }
 
-
     makeOrder = (fields) => {
         const data = {
             name: fields[0].value,
@@ -23,7 +22,7 @@ export class MakeOrderModel {
         if (this.isDataValid(fields)) {
             localStorage.removeItem('cart');
             localStorage.setItem('orderData', JSON.stringify(data));
-            this.handleRerenderCart();
+            this.handleRerenderCart(data);
             return true;
         }
     }

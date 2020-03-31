@@ -8,7 +8,7 @@ export class CartController {
 
         this.subscribe('cart', this.handleCart);
         this.subscribe('prodList', this.handleCardList);
-        this.subscribe('cartAfterOrder', this.handleRerenderCart);
+        this.subscribe('afterOrder', this.handleRerenderCart);
 
         this.view = new CartView(
             this.handleNotifyCartList, 
@@ -43,6 +43,7 @@ export class CartController {
         this.view.renderCartList(updatedLocalStorageCart, productList);
     }
 
+    // delete product from cart
     handleDeleteItem = (el) => {
         const localStorageCart = this.model.getLocalStorageCart();
         this.view.deleteItem(el, localStorageCart);

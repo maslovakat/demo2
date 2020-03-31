@@ -27,7 +27,6 @@ export class DetailsView {
             </div>
             <div class="modal-footer">
 			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			  <button type="button" data-id='${id}' class="btn btn-primary">Add to Basket</button>
 			</div>
         `
         this.modal.classList.add(this.showClass);

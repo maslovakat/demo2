@@ -37,6 +37,9 @@ export class ProductListModel {
             this.handleCardList();
             this.getSpeciesForNavigation();
         });
+
+        //let link1 = `${this.link}?species=${this.lastFilter}`;
+        // console.log('link1 = ', link1);
         ajax.open('GET', this.link);
         ajax.send();
     }
