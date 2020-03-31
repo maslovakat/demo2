@@ -281,3 +281,6 @@ input {
     max-height: 600px;
     overflow-y: scroll;
 }
+.user {
+    background: #6c757d52;
+}

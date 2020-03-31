@@ -14,6 +14,14 @@ export class HistoryOrdersView {
         if (array) {
             array.forEach(order => {
                 let total = 0;
+                console.log('order = ', order);
+                orderItems += `
+                        <tr class = 'user'>
+                            <td>${order.name}</td>
+                            <td>${order.email}</td>
+                            <td colspan="4">${order.phone}</td>
+                        </tr>
+                    `;
                 order.products.forEach((prod, i) => {
                     orderItems += `
                         <tr>
