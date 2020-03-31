@@ -17,7 +17,7 @@ class ProductsController {
             if (filterBy) {
                 where = Object.assign({}, where, {species: filterBy});
             }
-            if (page && limit){
+            if (limit){
                 offset = page * limit;
             }
 
@@ -25,7 +25,7 @@ class ProductsController {
             if (Object.keys(where).length !== 0 && where.constructor === Object){
                 params = Object.assign({}, params, {where})
             }
-            if (offset && limit){
+            if (limit){
                 params = Object.assign({}, params, {offset}, {limit})
             }
 
