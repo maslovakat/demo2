@@ -7,45 +7,32 @@ class ProductsController {
 
         // console.log(req.query)
         try {
-            let parameters = {};
-            if (req.query.sortBy) {
-                switch (req.query.sortBy) {
-                    case 'price low':
-                        parameters.order = [['price', 'ASC']]
-                        break;
-                    case 'price high':
-                        parameters.order = [['price', 'DESC']]
-                        break;
-                    case 'age low':
-                        parameters.order = [['birth_date', 'DESC']]
-                        break;
-                    case 'age high':
-                        parameters.order = [['birth_date', 'ASC']]
-                        break;
-                    default:
-                        parameters.order = [['price', 'ASC']]
-                }
+            let {searchBy, sortBy="price", dir="asc", filterBy, page, limit} = req.query;
+            sortBy = sortBy === 'age' ? 'birth_date' : sortBy;
+            let where = {};
+            let offset = {};
+            if (searchBy) {
+                where = Object.assign({}, where, {breed: {[Op.like]: `%${searchBy}%`}});
             }
-            if (req.query.searchBy) {
-                parameters.where = {
-                    [Op.or]: [
-                        {
-                            breed: {
-                                [Op.like]: `${req.query.searchBy}%`
-                            }
-                        },
-                        {
-                            breed: {
-                                [Op.like]: `%${req.query.searchBy}%`
-                            }
-                        }
-                    ]
-
-                };
-                
+            if (filterBy) {
+                where = Object.assign({}, where, {species: filterBy});
+            }
+            if (page && limit){
+                offset = page * limit;
             }
 
-            const products = await productService.findMany(parameters);
+            let params = {};
+            if (Object.keys(where).length !== 0 && where.constructor === Object){
+                params = Object.assign({}, params, {where})
+            }
+            if (offset && limit){
+                params = Object.assign({}, params, {offset}, {limit})
+            }
+
+            params = Object.assign({}, params, {order: [[sortBy, dir.toUpperCase()]]});
+
+
+            const products = await productService.findMany(params);
             res.json(products);
         } catch (e) {
             next(e);
