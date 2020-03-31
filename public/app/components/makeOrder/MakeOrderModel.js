@@ -11,23 +11,19 @@ export class MakeOrderModel {
         this.cartList = cards;
     }
 
-
-    async makeOrder(fields) {
-        let idList = [];
-        this.cartList.forEach(e => idList.push(e.id))
-
+    makeOrder = (fields) => {
         let data = {
             name: fields[0].value,
             email: fields[1].value,
             phone: fields[2].value,
-            products: idList
+            products: this.cartList
         }
 
 
         if (this.isDataValid(fields)) {
             data = JSON.stringify(data);
             localStorage.removeItem('cart');
-            // localStorage.setItem('orderData', data);
+            localStorage.setItem('orderData', data);
             this.handleRerenderCart();
             console.log(data);
 

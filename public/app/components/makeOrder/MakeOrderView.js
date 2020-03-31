@@ -22,6 +22,5 @@ export class MakeOrderView {
             field.classList.remove('is-invalid') :
             field.classList.add('is-invalid');
     }
-
     
 }

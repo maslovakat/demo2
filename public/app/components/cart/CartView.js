@@ -48,7 +48,7 @@ export class CartView {
     }
 
     renderCartList = (listId, productList) => {
-        let cartList = [];
+        let cartList = []; // массив объектов cart добавленных в корзину
         let cartItems = ``;
         let countTotal = 0;
 
@@ -68,19 +68,20 @@ export class CartView {
             cartItems = '';
         } else {
             cartList.forEach((item, index) => {
-                cartItems += `<tr id="${index}">
-                <td class="w-25">
-                    <img src="${item.imageSrc}"
-                        class="img-fluid img-thumbnail">
-                </td>
-                <td>${item.species}${item.breed}</td>
-                <td>${item.price}$</td>
-                <td>
-                    <a href="#" class="delete-item btn btn-danger btn-sm">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </td>
-                </tr>`
+                cartItems += `
+                <tr id="${index}">
+                    <td class="w-25">
+                        <img src="${item.imageSrc}"
+                            class="img-fluid img-thumbnail">
+                    </td>
+                    <td>${item.species}${item.breed}</td>
+                    <td>${item.price}$</td>
+                    <td>
+                        <a href="#" class="delete-item btn btn-danger btn-sm">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </td>
+                </tr>`;
 
             countTotal += item.price;
             });

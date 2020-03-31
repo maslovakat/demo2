@@ -61,7 +61,7 @@ input {
 }
 /* ----basket------ */
 .basket {
-    margin-left: 20px;
+    margin-left: 15px;
 }
 .basket_btn {
     color: #fff;
@@ -71,7 +71,7 @@ input {
     font-size: 22px;
     margin-top: 3px;
 }
-.basket_btn:hover {
+.basket_btn:hover, .history_btn:hover {
     color: rgba(255,255,255,.75);;
 }
 .basket_counter {
@@ -82,6 +82,11 @@ input {
     width: 20px;
     height: 20px;
     font-size: 12px;
+}
+.history_btn {
+    color: #fff;
+    font-size: 22px;
+    margin-left: 15px;
 }
 /* ---card---- */
 .card {
@@ -270,4 +275,9 @@ input {
 .card-info-price {
     color: #007bff;
     font-size: 20px;
+}
+
+.history-content {
+    max-height: 600px;
+    overflow-y: scroll;
 }
