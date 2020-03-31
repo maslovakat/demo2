@@ -18,7 +18,6 @@ export class MakeOrderController {
 
     handleRerenderCart = (data) => {
         this.notify('afterOrder', null);
-        this.notify('makeOrder', data);
     }
 
     handleSetOrderData = (e) => {

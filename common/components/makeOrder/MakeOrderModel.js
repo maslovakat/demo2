@@ -22,7 +22,7 @@ export class MakeOrderModel {
         if (this.isDataValid(fields)) {
             localStorage.removeItem('cart');
             localStorage.setItem('orderData', JSON.stringify(data));
-            this.handleRerenderCart(data);
+            this.handleRerenderCart();
             return true;
         }
     }
