@@ -10,10 +10,10 @@ export class HistoryOrdersView {
 
     showModal(list) {
         let orderItems = '';
-        let total = 0;
         const array = JSON.parse(list);
         if (array) {
             array.forEach(order => {
+                let total = 0;
                 order.products.forEach((prod, i) => {
                     orderItems += `
                         <tr>
