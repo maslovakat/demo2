@@ -1,11 +1,9 @@
 const productService = require('./products.service');
 const { Op } = require('sequelize');
 
-
 class ProductsController {
     async findMany(req, res, next) {
 
-        // console.log(req.query)
         try {
             let {searchBy, sortBy="price", dir="asc", filterBy, page, limit} = req.query;
             sortBy = sortBy === 'age' ? 'birth_date' : sortBy;
@@ -30,7 +28,6 @@ class ProductsController {
             }
 
             params = Object.assign({}, params, {order: [[sortBy, dir.toUpperCase()]]});
-
 
             const products = await productService.findMany(params);
             res.json(products);

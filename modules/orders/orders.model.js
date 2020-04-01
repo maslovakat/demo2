@@ -1,7 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../../db');
 const OrderItemModel = require('./order-item.model');
-const ProductModel = require('../products/products.model');
 const CustomerModel = require('../customers/customers.model');
 
 class Order extends Model {}
@@ -13,7 +12,5 @@ const OrderModel = Order.init({
 
 OrderModel.hasMany(OrderItemModel, { foreignKey: 'orderId', as: 'items' }); 
 OrderModel.hasOne(CustomerModel, { foreignKey: 'orderId', foreignKeyConstraint: true, as: 'customer' }); // orderId на стороне customer
-
-OrderItemModel.belongsTo(ProductModel, { foreignKeyConstraint: true, foreignKey: 'productId', targetKey: 'id' }); // у одного животного может быть много orderItem
 
 module.exports = OrderModel;

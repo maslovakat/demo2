@@ -17,6 +17,7 @@ export class CartView {
         this.btnList.forEach(btn => btn.addEventListener('click', this.handleAddToCart));
     }
 
+    // кнопка addToCart
     addToCart = (e, list) => {
         e.preventDefault();
         
@@ -25,7 +26,7 @@ export class CartView {
         if (list === null) {
             list = `${e.target.id}`;
         } else {
-            // check is it repeated item?
+            // проверка на повтор продукта
             isExist = list.split(',').find(el => el === e.target.id);
             if (isExist) {
                 return list;
@@ -49,7 +50,7 @@ export class CartView {
 
     renderCartList = (listId, productList) => {
         let cartList = []; // массив объектов cart добавленных в корзину
-        let cartItems = ``;
+        let cartItems = ``; // конкатинирует html строки
         let countTotal = 0;
 
         if (listId === null) {
@@ -57,12 +58,12 @@ export class CartView {
         } else {
             listId = listId.split(',');
             for (let i = 0; i < listId.length; i++) {
-                let cartItem = productList.filter(e => e.id === +listId[i]);
+                let cartItem = productList.filter(e => e.id === +listId[i]); // найти в общем списке по id
                 cartList.push(cartItem[0]);
             }
         }
 
-        this.handleNotifyCartList(cartList);
+        this.handleNotifyCartList(cartList); // нотифицируем в makeOrder
 
         if (cartList === []) {
             cartItems = '';
