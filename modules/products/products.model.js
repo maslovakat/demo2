@@ -19,6 +19,7 @@ const ProductModel = Product.init({
     hair: { type: DataTypes.STRING, allowNull: true},
     createdAt: { type: DataTypes.DATE, allowNull: false, defaultValue: new Date()},
     updatedAt: { type: DataTypes.DATE, allowNull: false, defaultValue: new Date()},
+    inStock: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true},
 }, {sequelize, createdAt: false, updatedAt: false });
 
 

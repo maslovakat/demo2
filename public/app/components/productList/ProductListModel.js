@@ -26,9 +26,8 @@ export class ProductListModel {
 
     getProductList() {
         const ajax = new XMLHttpRequest();
-
         ajax.addEventListener("load", () => {
-            this.productList = JSON.parse(ajax.responseText);
+            this.productList = JSON.parse(ajax.responseText).filter(el => el.inStock === true); // продукты которые в наличии
             this.filteredList = this.productList;
             this.productList.forEach(el => {
                 el.age = this.getAge(el)
