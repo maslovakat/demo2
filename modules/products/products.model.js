@@ -19,7 +19,7 @@ const ProductModel = Product.init({
     hair: { type: DataTypes.STRING, allowNull: true},
     createdAt: { type: DataTypes.DATE, allowNull: false, defaultValue: new Date()},
     updatedAt: { type: DataTypes.DATE, allowNull: false, defaultValue: new Date()},
-}, {sequelize, modelName: 'Product'});
+}, {sequelize, createdAt: false, updatedAt: false });
 
 
 module.exports =  ProductModel ;
