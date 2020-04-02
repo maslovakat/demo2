@@ -1,5 +1,6 @@
 const OrderModel = require('./orders.model');
 const OrderItemModel = require('./order-item.model');
+const ProductModel = require('../products/products.model');
 const CustomerModel = require('../customers/customers.model');
 const sequelize = require('../../db');
 const customersService = require('../customers/customers.service');
@@ -11,7 +12,7 @@ class OrdersService {
         return OrderModel.findAll({
             include: [
                 { model: CustomerModel, as: 'customer'},
-                { model: OrderItemModel, as: 'items' }],
+                { model: OrderItemModel, include: { model: ProductModel }, as: 'items' }],
             attributes: ['postedDate']
         });
     }

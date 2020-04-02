@@ -12,7 +12,6 @@ export class FilterSearchController {
 
     handleFilter = (e) => {
         this.notify('filter', e.target.id);
-        this.view.renderActiveFilter(e.target);
     }
 
     handleAll = () => {

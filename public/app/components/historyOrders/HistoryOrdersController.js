@@ -7,15 +7,26 @@ export class HistoryOrdersController {
         this.model = new HistoryOrdersModel();
 
         this.subscribe = subscribe;
+        //this.subscribe('afterOrder', this.handleMakeHistory);
 
-        this.subscribe('afterOrder', this.handleMakeHistory);
+        //this.model.getOrders();
+
+
     }
 
     handleMakeHistory = () => {
         this.model.makeHistory();
     }
 
+    // showHistory = () => {
+    //     this.view.showModal(this.model.getLocalHistory());
+    // }
+
+
     showHistory = () => {
-        this.view.showModal(this.model.getLocalHistory());
+        // this.model.getOrders();
+        // const li = this.model.getHistory();
+        // console.log('li = ', li);
+        this.view.showModal(this.model.getOrders());
     }
 }

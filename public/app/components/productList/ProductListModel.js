@@ -4,7 +4,7 @@ export class ProductListModel {
     otherAnimals;
     lastFilter; // membered last filter configuration
     lastSort;  // membered last sort configuration
-    lastSearch;
+    lastSearch; // membered last search configuration
     paginationCount = 6;
     paginationPage = 1;
     
@@ -37,8 +37,6 @@ export class ProductListModel {
             this.getSpeciesForNavigation();
         });
 
-        //let link1 = `${this.link}?species=${this.lastFilter}`;
-        // console.log('link1 = ', link1);
         ajax.open('GET', this.link);
         ajax.send();
     }

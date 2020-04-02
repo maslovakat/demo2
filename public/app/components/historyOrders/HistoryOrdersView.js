@@ -3,37 +3,37 @@ export class HistoryOrdersView {
         this.historyModal = document.querySelector('#historyModal');
         this.historyTableBody = document.querySelector('.history-table-body');
         this.historyBtn = document.querySelector('.history_btn');
-        this.historyBtn.addEventListener('click', listener);
 
+        this.historyBtn.addEventListener('click', listener);
         this.historyModal.addEventListener('click', this.closeModal);
     }
 
     showModal(list) {
         let orderItems = '';
-        const array = JSON.parse(list);
-        if (array) {
-            array.forEach(order => {
+        if (list) {
+            list.forEach(order => {
                 let total = 0;
-                console.log('order = ', order);
+                let { customer, items } = order;
                 orderItems += `
                         <tr class = 'user'>
-                            <td>${order.name}</td>
-                            <td>${order.email}</td>
-                            <td colspan="4">${order.phone}</td>
+                            <td>${customer.name}</td>
+                            <td>${customer.email}</td>
+                            <td colspan="4">${customer.phone}</td>
                         </tr>
                     `;
-                order.products.forEach((prod, i) => {
+                items.forEach((prop, i) => {
+                    let {Product} = prop;
                     orderItems += `
                         <tr>
                             <td>${i+1}</td>
-                            <td>${prod.species}</td>
-                            <td>${prod.breed}</td>
+                            <td>${Product.species}</td>
+                            <td>${Product.breed}</td>
                             <td>1</td>
-                            <td>${prod.price}$</td>
+                            <td>${Product.price}$</td>
                             <td>confirmed</td>
                         </tr>
                     `;
-                    total += prod.price;
+                    total += Product.price;
                 });
                 orderItems += `<tr>
                                 <td></td>
